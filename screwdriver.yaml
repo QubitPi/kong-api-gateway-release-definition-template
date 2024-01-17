@@ -1,46 +1,27 @@
+# Copyright Jiaqi Liu
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 ---
 shared:
-  image: node:8
+  image: node:18
 jobs:
-  # 1. Validate templates
-  validate_templates:
+  main:
     requires: [~pr, ~commit]
     steps:
-    - install_prerequisites: npm install -g screwdriver-template-main
-    # a. Validate the default (golang/init) template
-    - validate_default_template: template-validate
-    # b. Validate the non-default (nodejs/test) template
-    - validate_nodejs_template: |
-        export SD_TEMPLATE_PATH=./templates/nodejs.yaml
-        template-validate
-
-  # 2a. Publish and tag the golang template in one job
-  # Note: We do not need to set SD_TEMPLATE_PATH since that template is in the default path (sd-template.yaml)
-  publish_default_template:
-    requires: [validate_templates]
+      - install: npm install -g screwdriver-template-main
+      - validate: template-validate
+  publish:
+    requires: main
     steps:
-    - install_prerequisites: npm install -g screwdriver-template-main
-    - publish:  template-publish
-    - autotag: template-tag --name golang/init --tag latest
-
-  # 2b. Publish the nodejs template and tag with "latest"
-  # Note: Need to set SD_TEMPLATE_PATH since it is not at the default (sd-template.yaml)
-  # The remote test starts after this job completes (https://github.com/screwdriver-cd-test/template-test-example)
-  publish_nodejs_template:
-    requires: [validate_templates]
-    environment:
-      SD_TEMPLATE_PATH: ./templates/nodejs.yaml
-    steps:
-    - install_prerequisites: npm install -g screwdriver-template-main
-    - publish:  template-publish
-    - autotag: template-tag --name nodejs/test --tag latest
-
-  # 3. Promote the nodejs template with the "stable" tag
-  # Only promotes if the remote test is successful
-  promote_nodejs_template:
-    requires: [~sd@1733:test_nodejs_template]
-    environment:
-      SD_TEMPLATE_PATH: ./templates/nodejs.yaml
-    steps:
-    - install_prerequisites: npm install -g screwdriver-template-main
-    - autotag: template-tag --name nodejs/test --tag stable
+      - install: npm install -g screwdriver-template-main
+      - publish: template-publish --tag latest
