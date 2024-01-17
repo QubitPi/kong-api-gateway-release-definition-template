@@ -1,19 +1,48 @@
-namespace: golang
-name: init
-version: "2"
-description: An example template for testing golang files
-maintainer: foo@bar.com
+# Copyright Jiaqi Liu
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+namespace: QubitPi
+name: kong_api_gateway_release_definition_template
+version: '1.0.0'
+description: Deploying using hashicorp-aws
+maintainer: jack20220723@gmail.com
 config:
-  image: golang
+  image: buildpack-deps:22.04-scm
   steps:
-    - glide: |
-        export PATH=$PATH:$GOPATH/bin
-        go get -v github.com/Masterminds/glide
-    - install: glide install
-    - vet: go vet ./...
-    - gofmt: "find . -name '*.go' | xargs gofmt -s -w"
-    - test: go test ./...
-    # Ensure we can compile
-    - build: go build -a -o /dev/null
-    # Test cross-compiling as well
-    - test-release: "curl -sL https://git.io/goreleaser | bash -s -- --snapshot"
+    - install-packer: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QubitPi/hashicorp-aws/master/auxiliary/scripts/install-hashicorp-packer-ubuntu.sh)"
+    - install-terraform: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QubitPi/hashicorp-aws/master/auxiliary/scripts/install-hashicorp-terraform-ubuntu.sh)"
+
+    - checkout-hashicorp-deployment-tool: git clone https://github.com/QubitPi/hashicorp-aws.git ../hashicorp-aws
+    - load-packer-variable-file: echo "$AWS_WS_PKRVARS_HCL" > ../hashicorp-aws/hashicorp/kong/images/aws-kong.auto.pkrvars.hcl
+    - load-ssl-certificate: echo "$SSL_CERTIFICATE" > ../hashicorp-aws/hashicorp/kong/images/ssl.crt
+    - load-ssl-certificate-key: echo "$SSL_CERTIFICATE_KEY" > ../hashicorp-aws/hashicorp/kong/images/ssl.key
+    - load-nginx-config-file-for-ssl: echo "$NGINX_CONFIG_FILE" > ../hashicorp-aws/hashicorp/kong/images/nginx.conf
+
+    - load-terraform-variable-file: echo "$AWS_WS_TFVARS" > ../hashicorp-aws/hashicorp/kong/instances/aws-kong.auto.tfvars
+
+    - packer-init: cd ../hashicorp-aws/hashicorp/kong/images/ && packer init .
+    - packer-validate: packer validate -var "skip_create_ami=true" .
+    - packer-build: packer build -var "skip_create_ami=false" .
+
+    - terraform-init: cd ../instances && terraform init
+    - terraform-validate: terraform validate
+    - terraform-apply: terraform apply -auto-approve
+  secrets:
+    - AWS_WS_PKRVARS_HCL
+    - SSL_CERTIFICATE
+    - SSL_CERTIFICATE_KEY
+    - NGINX_CONFIG_FILE
+    - AWS_WS_TFVARS
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
