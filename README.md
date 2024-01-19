@@ -4,25 +4,21 @@ Kong API Gateway Release Definition Template
 [![Screwdriver CD badge][Screwdriver CD badge]][Screwdriver CD url]
 [![HashiCorp Packer badge][HashiCorp Packer badge]][HashiCorp Packer url]
 [![HashiCorp Terraform badge][HashiCorp Terraform badge]][HashiCorp Terraform url]
-[![Apache License Badge]](https://www.apache.org/licenses/LICENSE-2.0)
+[![Apache License badge]][Apache License url]
 
 A [Screwdriver CD template] that deploys an [immutable][Immutable Infrastructure] instance of [Kong API Gateway] to 
 AWS. It uses the [screwdriver-template-main npm package] to assist with template validation, publishing, and tagging. 
 This template tags the latest versions with the `latest` tag.
 
-> [!TIP]
-> A working
-> [Screwdriver CD pipeline that uses this template](https://github.com/QubitPi/kong-api-gateway-release-definition) has 
-> been already made ready for you to use. Please check it out as well <img src="https://github.com/QubitPi/QubitPi/blob/master/img/8%E5%A5%BD.gif?raw=true" height="40px"/>
-
 How to Use This Template
 ------------------------
 
-> [!IMPORTANT]
+> [!TIP]
 > Before preceding, please note that it is assumed [Kong API gateway release definition template](./sd-template.yaml) 
 > has already been installed in Screwdriver CD.
 >
 > If not, please see documentation on [publishing a template in Screwdriver]
+> <img src="https://github.com/QubitPi/QubitPi/blob/master/img/8%E5%A5%BD.gif?raw=true" height="40px"/>
 
 [Create a Screwdriver pipeline that uses this template](https://qubitpi.github.io/screwdriver-cd-guide/user-guide/templates#using-a-template). Here is an example:
 
@@ -89,7 +85,7 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
   - `gateway_domain` is the SSL-enabled domain that will serve [Kong manager UI]
   - `route_53_zone_id` is the AWS Route 53 hosted Zone ID that hosts the domain `gateway.mycompany.com`
 
-> [!NOTE]
+> [!TIP]
 > To find the zone ID in AWS Route 53, we can:
 >
 > 1. Sign in to the AWS Management Console
@@ -109,7 +105,8 @@ The use and distribution terms for [Kong API gateway release definition template
     </a>
 </div>
 
-[Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
+[Apache License badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
+[Apache License url]: https://www.apache.org/licenses/LICENSE-2.0
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 [AWS AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
 [AWS EC2 instance type]: https://aws.amazon.com/ec2/instance-types/
