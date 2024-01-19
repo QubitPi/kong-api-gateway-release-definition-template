@@ -13,9 +13,9 @@
 # limitations under the License.
 ---
 namespace: QubitPi
-name: kong_api_gateway_release_definition_template
+name: kong-api-gateway-release-definition-template
 version: '1.0.0'
-description: Deploying using hashicorp-aws
+description: Screwdriver CD template for deploying Kong API Gateway (https://github.com/QubitPi/docker-kong) to AWS through HashiCorp.
 maintainer: jack20220723@gmail.com
 config:
   image: buildpack-deps:22.04-scm
