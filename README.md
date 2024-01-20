@@ -5,6 +5,7 @@ Kong API Gateway Release Definition Template
 [![HashiCorp Packer badge][HashiCorp Packer badge]][HashiCorp Packer url]
 [![HashiCorp Terraform badge][HashiCorp Terraform badge]][HashiCorp Terraform url]
 [![Apache License badge]][Apache License url]
+[![GitHub Workflow Status][GitHub Workflow Status badge]][GitHub Workflow Status url]
 
 A [Screwdriver CD template] that deploys an [immutable][Immutable Infrastructure] instance of [Kong API Gateway] to 
 AWS. It uses the [screwdriver-template-main npm package] to assist with template validation, publishing, and tagging. 
@@ -112,6 +113,9 @@ The use and distribution terms for [Kong API gateway release definition template
 [AWS EC2 instance type]: https://aws.amazon.com/ec2/instance-types/
 [AWS regions]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Availability
 [AWS Security Group]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html
+
+[GitHub Workflow Status badge]: https://img.shields.io/github/actions/workflow/status/QubitPi/kong-api-gateway-release-definition-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
+[GitHub Workflow Status url]: https://github.com/QubitPi/kong-api-gateway-release-definition-template/actions/workflows/ci-cd.yml
 
 [HashiCorp Packer badge]: https://img.shields.io/badge/Packer-02A8EF?style=for-the-badge&logo=Packer&logoColor=white
 [HashiCorp Packer url]: https://qubitpi.github.io/hashicorp-packer/packer/docs
