@@ -23,7 +23,7 @@ config:
     - install-packer: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QubitPi/hashicorp-aws/master/auxiliary/scripts/install-hashicorp-packer-ubuntu.sh)"
     - install-terraform: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/QubitPi/hashicorp-aws/master/auxiliary/scripts/install-hashicorp-terraform-ubuntu.sh)"
 
-    - checkout-hashicorp-deployment-tool: git clone https://github.com/QubitPi/hashicorp-aws.git ../hashicorp-aws
+    - checkout-hashicorp-deployment-tool: git clone --depth 1 https://github.com/QubitPi/hashicorp-aws.git ../hashicorp-aws
     - load-packer-variable-file: echo "$AWS_WS_PKRVARS_HCL" > ../hashicorp-aws/hashicorp/kong/images/aws-kong.auto.pkrvars.hcl
     - load-ssl-certificate: echo "$SSL_CERTIFICATE" > ../hashicorp-aws/hashicorp/kong/images/ssl.crt
     - load-ssl-certificate-key: echo "$SSL_CERTIFICATE_KEY" > ../hashicorp-aws/hashicorp/kong/images/ssl.key
