@@ -90,13 +90,14 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
   - `ec2_security_groups` is the [AWS Security Group] _name_ (yes, not ID, but name...)
   - `gateway_domain` is the SSL-enabled domain that will serve [Kong manager UI]
   - `route_53_zone_id` is the AWS Route 53 hosted Zone ID that hosts the domain `gateway.mycompany.com`
-    > [!TIP]
-    > To find the zone ID in AWS Route 53, we can:
-    >
-    > 1. Sign in to the AWS Management Console
-    > 2. Open the Route 53 console at https://console.aws.amazon.com/route53/
-    > 3. Select Hosted zones in the navigation pane
-    > 4. Find the requested ID in the top level Hosted Zones summary in the Route 53 section
+
+        > [!TIP]
+        > To find the zone ID in AWS Route 53, we can:
+        >
+        > 1. Sign in to the AWS Management Console
+        > 2. Open the Route 53 console at https://console.aws.amazon.com/route53/
+        > 3. Select Hosted zones in the navigation pane
+        > 4. Find the requested ID in the top level Hosted Zones summary in the Route 53 section
 
 License
 -------
