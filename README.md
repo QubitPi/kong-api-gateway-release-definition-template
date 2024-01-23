@@ -11,15 +11,20 @@ A [Screwdriver CD template] that deploys an [immutable][Immutable Infrastructure
 AWS. It uses the [screwdriver-template-main npm package] to assist with template validation, publishing, and tagging. 
 This template tags the latest versions with the `latest` tag.
 
+> [!TIP]
+> [Kong API gateway release definition template] is a satellite project of
+> [hashicorp-aws](https://qubitpi.github.io/hashicorp-aws/) and more documentation can be found in its
+> [dedicated page for Kong deployment support](https://qubitpi.github.io/hashicorp-aws/docs/kong)
+> <img src="https://github.com/QubitPi/QubitPi/blob/master/img/8%E5%A5%BD.gif?raw=true" height="40px"/>
+
 How to Use This Template
 ------------------------
 
-> [!TIP]
+> [!NOTE]
 > Before preceding, please note that it is assumed [Kong API gateway release definition template](templates/sd-template.yaml) 
 > has already been installed in Screwdriver CD.
 >
 > If not, please see documentation on [publishing a template in Screwdriver]
-> <img src="https://github.com/QubitPi/QubitPi/blob/master/img/8%E5%A5%BD.gif?raw=true" height="40px"/>
 
 [Create a Screwdriver pipeline that uses this template](https://qubitpi.github.io/screwdriver-cd-guide/user-guide/templates#using-a-template). Here is an example:
 
@@ -63,8 +68,8 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
   - `ami_name` is the published AMI name; it can be arbitrary
   - `instance_type` is the recommended [AWS EC2 instance type] running this image
   - Please keep the values of `aws_kong_ssl_cert_file_path`, `aws_kong_ssl_cert_key_file_path`, and
-    `aws_kong_nginx_config_file_path` as they are. They are used by [template](templates/sd-template.yaml) so that SSL configs
-    are picked up from the right locations
+    `aws_kong_nginx_config_file_path` as they are. They are used by [template](templates/sd-template.yaml) so that SSL 
+    configs are picked up from the right locations
 
 - **AWS_WS_TFVARS** - A [HashiCorp Terraform variable values file] with the following variable values:
 
