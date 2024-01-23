@@ -35,11 +35,11 @@ jobs:
     requires: [~pr, ~commit]
     template: QubitPi/kong_api_gateway_release_definition_template@latest
     secrets:
-      - AWS_WS_PKRVARS_HCL
+      - AWS_KONG_PKRVARS_HCL
       - SSL_CERTIFICATE
       - SSL_CERTIFICATE_KEY
       - NGINX_CONFIG_FILE
-      - AWS_WS_TFVARS
+      - AWS_KONG_TFVARS
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
 ```
@@ -53,7 +53,7 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
 - [**SSL_CERTIFICATE_KEY**](https://qubitpi.github.io/hashicorp-aws/docs/setup#ssl)
 - [**NGINX_CONFIG_FILE**](https://qubitpi.github.io/hashicorp-aws/docs/setup#ssl)
 
-- **AWS_WS_PKRVARS_HCL** - A [HashiCorp Packer variable values file] with the following variable values:
+- **AWS_KONG_PKRVARS_HCL** - A [HashiCorp Packer variable values file] with the following variable values:
 
   ```hcl
   aws_image_region                 = "us-east-2"
@@ -71,7 +71,7 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
     `aws_kong_nginx_config_file_path` as they are. They are used by [template](templates/sd-template.yaml) so that SSL 
     configs are picked up from the right locations
 
-- **AWS_WS_TFVARS** - A [HashiCorp Terraform variable values file] with the following variable values:
+- **AWS_KONG_TFVARS** - A [HashiCorp Terraform variable values file] with the following variable values:
 
   ```hcl
   aws_deploy_region   = "us-east-2"
@@ -84,7 +84,7 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
   ```
 
   - `aws_deploy_region` is the [EC2 runtime region][AWS regions]
-  - `ami_name` is the name of the published AMI; **it must be the same as the `ami_name` in AWS_WS_PKRVARS_HCL**
+  - `ami_name` is the name of the published AMI; **it must be the same as the `ami_name` in AWS_KONG_PKRVARS_HCL**
   - `instance_type` is the chosen [AWS EC2 instance type] at runtime
   - `ec2_instance_name` is the deployed EC2 name as appeared in the instance list of AWS console; it can be arbitrary
   - `ec2_security_groups` is the [AWS Security Group] _name_ (yes, not ID, but name...)
