@@ -21,8 +21,9 @@ How to Use This Template
 ------------------------
 
 > [!NOTE]
-> Before preceding, please note that it is assumed [Kong API gateway release definition template](templates/sd-template.yaml) 
-> has already been installed in Screwdriver CD.
+> Before preceding, please note that it is assumed
+> [Kong API gateway release definition template](templates/sd-template.yaml) has already been installed in Screwdriver 
+> CD.
 >
 > If not, please see documentation on [publishing a template in Screwdriver]
 
@@ -33,7 +34,7 @@ How to Use This Template
 jobs:
   main:
     requires: [~pr, ~commit]
-    template: QubitPi/kong_api_gateway_release_definition_template@latest
+    template: QubitPi/kong-api-gateway-release-definition-template@latest
     secrets:
       - AWS_KONG_PKRVARS_HCL
       - SSL_CERTIFICATE
@@ -56,12 +57,12 @@ The following [Screwdriver Secrets] needs to be defined before running this temp
 - **AWS_KONG_PKRVARS_HCL** - A [HashiCorp Packer variable values file] with the following variable values:
 
   ```hcl
-  aws_image_region                 = "us-east-2"
-  ami_name                         = "my-kong-ami"
-  instance_type                    = "t2.small"
-  aws_kong_ssl_cert_file_path        = "ssl.crt"
-  aws_kong_ssl_cert_key_file_path    = "ssl.key"
-  aws_kong_nginx_config_file_path    = "nginx.conf"
+  aws_image_region                = "us-east-2"
+  ami_name                        = "my-kong-ami"
+  instance_type                   = "t2.small"
+  aws_kong_ssl_cert_file_path     = "ssl.crt"
+  aws_kong_ssl_cert_key_file_path = "ssl.key"
+  aws_kong_nginx_config_file_path = "nginx.conf"
   ```
 
   - `aws_image_region` is the [image region][AWS regions] of [AWS AMI]
