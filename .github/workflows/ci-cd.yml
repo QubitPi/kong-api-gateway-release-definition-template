@@ -21,5 +21,28 @@ name: CI/CD
       - master
 
 jobs:
-  mk-yml-style-check:
+  validate-templates:
     uses: QubitPi/hashicorp-aws/.github/workflows/screwdriver-cd-templates-ci-cd.yml@master
+
+  validate-pipeline:
+    name: Validating screwdriver.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Validate screwdriver.yaml
+        uses: satackey/action-js-inline@v0.0.2
+        with:
+          required-packages: js-yaml screwdriver-data-schema
+          script: |
+            const error = require("screwdriver-data-schema").api.validator.input
+              .validate(
+                require('js-yaml').load(
+                  'yaml: require("fs").readFileSync("screwdriver.yaml")'
+                )
+            ).error
+            if (error) {
+              require('@actions/core').setFailed(error);
+            }
