@@ -116,7 +116,7 @@ The use and distribution terms for [Kong API gateway release definition template
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 [AWS AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
 [AWS EC2 instance type]: https://aws.amazon.com/ec2/instance-types/
-[AWS regions]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Availability
+[AWS regions]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
 [AWS Security Group]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html
 
 [GitHub Workflow Status badge]: https://img.shields.io/github/actions/workflow/status/QubitPi/kong-api-gateway-release-definition-template/ci-cd.yml?branch=master&logo=github&style=for-the-badge
